@@ -10,6 +10,6 @@ import com.example.demo.data.Film;
 @Repository
 public interface FilmRepo extends JpaRepository<Film,Integer>{
 	
-	List<Film> findByNameIgnoreCase(String name);
+	List<Film> findByFilmTitleIgnoreCase(String filmTitle);
 
 }

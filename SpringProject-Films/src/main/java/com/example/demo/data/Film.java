@@ -4,8 +4,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
-import org.springframework.data.annotation.Id;
 
 @Entity
 public class Film {
@@ -49,7 +49,7 @@ public class Film {
 		return filmTitle;
 	}
 
-	public void setName(String title) {
+	public void setTitle(String title) {
 		this.filmTitle = title;
 	}
 
@@ -65,7 +65,7 @@ public class Film {
 		return runtime;
 	}
 
-	public void setAge(int runtime) {
+	public void setRuntime(int runtime) {
 		this.runtime = runtime;
 	}
 

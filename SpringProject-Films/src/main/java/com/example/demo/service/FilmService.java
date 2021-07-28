@@ -11,5 +11,11 @@ public interface FilmService {
 	public List<Film> getAllFilms();
 	
 	public String deleteFilm(int id);
+	
+	public Film getFilm(int id);
+	
+	public List<Film> getByName(String filmTitle);
+	
+	public Film putFilm(int id, Film newFilm);
 
 }

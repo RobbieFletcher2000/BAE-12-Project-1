@@ -1,10 +1,13 @@
 package com.example.demo.service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.stereotype.Service;
 
 import com.example.demo.data.Film;
+
+
 
 @Service
 public class FilmServiceList implements FilmService {
@@ -35,6 +38,22 @@ public class FilmServiceList implements FilmService {
 	public String deleteFilm(int id) {
 		this.films.remove(id);
 		return "Deleted film at index: " + id;
+	}
+	
+	@Override
+	public Film getFilm(int id) {
+		Film found = this.films.get(id);
+		return found;
+	}
+	
+	@Override
+	public List<Film> getByName(String filmTitle) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public Film putFilm(int id, Film newFilm) {
+		return this.films.set(id, newFilm);
 	}
 
 }
