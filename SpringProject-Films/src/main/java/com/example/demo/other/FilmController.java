@@ -59,14 +59,14 @@ public class FilmController {
 		return new ResponseEntity<>(getFilmByID,HttpStatus.OK);
 	}
 	
-	@GetMapping("/getByName/{name}")
+	@GetMapping("/getByName/{filmTitle}")
 	public ResponseEntity<List<Film>> getByName(@PathVariable String filmTitle) {
 		return new ResponseEntity<>(this.service.getByName(filmTitle),HttpStatus.OK);
 	}
 	
 	@PutMapping("/putFilm/{id}")
 	public Film putFilm(@PathVariable int id, @RequestBody Film newFilm) {
-		return this.service.getFilm(id);
+		return this.service.putFilm(id, newFilm);
 	}
 	
 }

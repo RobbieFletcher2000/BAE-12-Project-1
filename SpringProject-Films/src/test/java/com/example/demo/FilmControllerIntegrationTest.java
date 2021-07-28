@@ -1,8 +1,14 @@
 package com.example.demo;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,4 +66,100 @@ public class FilmControllerIntegrationTest {
 		this.mockMVC.perform(request).andExpect(checkStatus).andExpect(checkBody);
 		
 	}
+	
+	@Test
+	void testDelete() throws Exception{
+		// create request
+		
+		RequestBuilder request = delete("/deleteFilm/1");
+		
+		
+		//check response
+		
+		ResultMatcher checkStatus = status().is(204);
+		ResultMatcher checkBody = content().string("Deleted: 1");
+		
+		this.mockMVC.perform(request).andExpect(checkStatus).andExpect(checkBody);
+	}
+	
+	@Test
+	void testGetAll() throws Exception{
+		
+		List<Film> allFilms = new ArrayList<>();
+		
+		Film testFilm1 = new Film(1,"Whiplash","Damien Chazelle",107,15);
+		Film testFilm2 = new Film(2,"The Gentlemen", "Guy Ritchie",113,18);
+		
+		allFilms.add(testFilm1);
+		allFilms.add(testFilm2);
+	
+		
+		String listAsJSON = this.mapper.writeValueAsString(allFilms);
+		//create request
+	    RequestBuilder request = get("/getAllFilms").contentType(MediaType.APPLICATION_JSON).content(listAsJSON);
+	
+	
+		
+	// check response
+		ResultMatcher checkStatus = status().is(200);
+		ResultMatcher checkBody = content().string(listAsJSON);		
+		
+		this.mockMVC.perform(request).andExpect(checkStatus).andExpect(checkBody);
+		
+	}
+	@Test
+	void testGetFilmByID() throws Exception{
+		
+		Film testFilm = new Film(1,"Whiplash","Damien Chazelle",107,15);
+		
+		String checkedFilmAsJSON = this.mapper.writeValueAsString(testFilm);
+		
+		
+		RequestBuilder request = get("/getFilm/1").contentType(MediaType.APPLICATION_JSON).content(checkedFilmAsJSON);
+		
+		
+		ResultMatcher checkStatus = status().is(200);
+		ResultMatcher checkBody = content().string(checkedFilmAsJSON);
+		
+		this.mockMVC.perform(request).andExpect(checkStatus).andExpect(checkBody);
+		
+		
+	}
+		@Test
+		void testGetByName() throws Exception{
+			List<Film> allFilms = new ArrayList<>();
+			
+			Film testFilm2 = new Film(2,"The Gentlemen", "Guy Ritchie",113,18);
+			
+			allFilms.add(testFilm2);
+			
+			
+			String listAsJSON = this.mapper.writeValueAsString(allFilms);
+			
+			
+			RequestBuilder request = get("/getByName/The Gentlemen").contentType(MediaType.APPLICATION_JSON).content(listAsJSON);
+			
+			// check response
+			ResultMatcher checkStatus = status().is(200);
+			ResultMatcher checkBody = content().json(listAsJSON);	
+			System.out.println(listAsJSON);			
+		    this.mockMVC.perform(request).andExpect(checkStatus).andExpect(checkBody);			
+			
+		}
+		
+		@Test
+		void testUpdate() throws Exception {
+			int id = 1;
+			Film newFilm = new Film(id, "Iron Man", "Jon Favreau",126,12);
+			String newFilmAsJSON = this.mapper.writeValueAsString(newFilm);
+
+			RequestBuilder req = put("/putFilm/" + id).contentType(MediaType.APPLICATION_JSON)
+					.content(newFilmAsJSON);
+
+			ResultMatcher checkStatus = status().is(200);
+
+			ResultMatcher checkBody = content().json(newFilmAsJSON);
+
+			this.mockMVC.perform(req).andExpect(checkStatus).andExpect(checkBody);
+		}
 }
