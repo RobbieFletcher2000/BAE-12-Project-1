@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
+        integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <style>
+        form>input {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <h1>YOUR WATCHLIST</h1>
+        <section id="getAllSection">
+            <h2>All Films On Your Watchlist:</h2>
+
+        </section>
+        <h2>Search for a specific film by its Watchlist ID:</h2>
+        <section id="getByIDSection">
+            <label for="filmID">Film ID:</label>
+            <input id="filmID">
+            <button onclick="getByID();">GET</button>
+        </section>
+        <div>
+            <section id="postSection">
+                <h2>Add a film to your Watchlist:</h2>
+                <form id= "createFilm">
+                    <label for="filmTitle">Film Title:</label>
+                    <input type="text" id="filmTitle" name="title" required>
+                    <label for="director">Director:</label>
+                    <input type="text" id="director" name="director" required>
+                    <label for="runtime">Runtime:</label>
+                    <input type="number" id="runtime" name="runtime" required min="1" max="500">
+                    <label for="ageRating">Age Rating:</label>
+                    <input type="number" id="ageRating" name="ageRating" required min="1" max="18">
+                    <br>
+                    <button type="reset">Reset</button>
+                    <button type="submit">Submit</button>
+                </form>
+
+
+
+
+
+
+
+            </section>
+        </div>
+
+        <h2>Search for a specific film by its title:</h2>
+        <section id="getByNameSection">
+            <label for="filmName">Film Title:</label>
+            <input id="filmName">
+            <button onclick="getByName();">GET</button>
+
+        </section>
+
+
+        <section id="updateFilmSection">
+            <h2>Update an existing film in your Watchlist. </h2>
+            <h4>(You can use this to replace a film rather than adding a new one to your list)</h4>
+            <form id= "updateFilm">
+                <label for="updateID">Film ID:</label>
+                <input type="number" id="updateID" name="updatedID" required>
+                <label for="updateFilmTitle">Film Title:</label>
+                <input type="text" id="updateFilmTitle" name="updatedTitle" required>
+                <label for="updateDirector">Director:</label>
+                <input type="text" id="updateDirector" name="updatedDirector" required>
+                <label for="updateRuntime">Runtime:</label>
+                <input type="number" id="updateRuntime" name="updatedRuntime" required min="1" max="500">
+                <label for="updateAgeRating">Age Rating:</label>
+                <input type="number" id="updateAgeRating" name="updatedAgeRating" required min="1" max="18">
+                <br>
+                <button type="reset">Reset</button>
+                <button type="submit">Submit</button>
+            </form>
+
+
+
+        </section>
+    </main>
+    <script src="JS-index.js"></script>
+</body>
+
+</html>
