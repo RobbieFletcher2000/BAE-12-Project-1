@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Watchlist</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
         integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -14,76 +14,82 @@
             display: block;
         }
     </style>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
 </head>
 
-<body>
-    <main>
+<body class="container">
+    <main class="row">
         <h1>YOUR WATCHLIST</h1>
-        <section id="getAllSection">
-            <h2>All Films On Your Watchlist:</h2>
+        <h2>All Films On Your Watchlist:</h2>
+        <section id="getAllSection" class="card-group row row-cols-3 g-4">
+
 
         </section>
-        <h2>Search for a specific film by its Watchlist ID:</h2>
-        <section id="getByIDSection">
+
+        <section id="getByIDSection" class="col">
+            <h2>Search for a specific film by its Watchlist ID:</h2>
             <label for="filmID">Film ID:</label>
             <input id="filmID">
-            <button onclick="getByID();">GET</button>
+            <button onclick="getByID();" class="btn btn-primary">Search</button>
+        </section>
+
+        <h2>Search for a specific film by its title:</h2>
+
+        <section id="getByNameSection" class="col-5">
+            <label for="filmName" class="form-label">Film Title:</label>
+            <input id="filmName" class="form-control">
+            <button onclick="getByName();" class="btn btn-primary">Search</button>
+
         </section>
         <div>
-            <section id="postSection">
+            <section id="postSection" class="col-5">
                 <h2>Add a film to your Watchlist:</h2>
-                <form id= "createFilm">
-                    <label for="filmTitle">Film Title:</label>
-                    <input type="text" id="filmTitle" name="title" required>
-                    <label for="director">Director:</label>
-                    <input type="text" id="director" name="director" required>
-                    <label for="runtime">Runtime:</label>
-                    <input type="number" id="runtime" name="runtime" required min="1" max="500">
-                    <label for="ageRating">Age Rating:</label>
-                    <input type="number" id="ageRating" name="ageRating" required min="1" max="18">
+                <form id="createFilm">
+                    <label for="filmTitle" class="form-label">Film Title:</label>
+                    <input type="text" id="filmTitle" name="title" class="form-control" required>
+                    <label for="director" class="form-label">Director:</label>
+                    <input type="text" id="director" name="director" class="form-control" required>
+                    <label for="runtime" class="form-label">Runtime:</label>
+                    <input type="number" id="runtime" name="runtime" class="form-control" required min="1" max="500">
+                    <label for="ageRating" class="form-label">Age Rating:</label>
+                    <input type="number" id="ageRating" name="ageRating" class="form-control" required min="1" max="18">
                     <br>
-                    <button type="reset">Reset</button>
-                    <button type="submit">Submit</button>
+                    <button type="reset" class="btn btn-primary">Reset</button>
+                    <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
-
-
-
-
-
-
-
             </section>
         </div>
 
-        <h2>Search for a specific film by its title:</h2>
-        <section id="getByNameSection">
-            <label for="filmName">Film Title:</label>
-            <input id="filmName">
-            <button onclick="getByName();">GET</button>
 
-        </section>
+       
+        </br>
 
+        <section class="col">
+            <section id="updateFilmSection">
+                <h2>Update an existing film in your Watchlist. </h2>
+                <h4>(You can use this to replace a film rather than adding a new one to your list)</h4>
+                <form id="updateFilm">
+                    <label for="updateID" class="form-label">Film ID:</label>
+                    <input type="number" id="updateID" name="updatedID" class="form-control" required>
+                    <label for="updateFilmTitle" class="form-label">Film Title:</label>
+                    <input type="text" id="updateFilmTitle" name="updatedTitle" class="form-control" required>
+                    <label for="updateDirector" class="form-label">Director:</label>
+                    <input type="text" id="updateDirector" name="updatedDirector" class="form-control" required>
+                    <label for="updateRuntime" class="form-label">Runtime:</label>
+                    <input type="number" id="updateRuntime" name="updatedRuntime" class="form-control" required min="1"
+                        max="500">
+                    <label for="updateAgeRating" class="form-label">Age Rating:</label>
+                    <input type="number" id="updateAgeRating" name="updatedAgeRating" class="form-control" required
+                        min="1" max="18">
+                    <br>
+                    <button type="reset" class="btn btn-primary">Reset</button>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
 
-        <section id="updateFilmSection">
-            <h2>Update an existing film in your Watchlist. </h2>
-            <h4>(You can use this to replace a film rather than adding a new one to your list)</h4>
-            <form id= "updateFilm">
-                <label for="updateID">Film ID:</label>
-                <input type="number" id="updateID" name="updatedID" required>
-                <label for="updateFilmTitle">Film Title:</label>
-                <input type="text" id="updateFilmTitle" name="updatedTitle" required>
-                <label for="updateDirector">Director:</label>
-                <input type="text" id="updateDirector" name="updatedDirector" required>
-                <label for="updateRuntime">Runtime:</label>
-                <input type="number" id="updateRuntime" name="updatedRuntime" required min="1" max="500">
-                <label for="updateAgeRating">Age Rating:</label>
-                <input type="number" id="updateAgeRating" name="updatedAgeRating" required min="1" max="18">
-                <br>
-                <button type="reset">Reset</button>
-                <button type="submit">Submit</button>
-            </form>
-
-
+            </section>
 
         </section>
     </main>

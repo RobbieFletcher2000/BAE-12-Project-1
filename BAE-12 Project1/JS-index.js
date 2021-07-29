@@ -19,10 +19,20 @@ const getAllFilms = () => {
     }).catch(err => console.log(err));
 }
 const renderFilm = (film,divSection) => {
-    const newFilm = document.createElement('div');
 
-    const filmTitle = document.createElement('h3');
+    const filmColumn = document.createElement('div');
+    filmColumn.classList.add("col");
+
+    const filmCard = document.createElement('div');
+    filmCard.classList.add("card");
+    filmColumn.appendChild(filmCard);
+    
+    const newFilm = document.createElement('div');
+    newFilm.classList.add("card-body");
+
+    const filmTitle = document.createElement('h4');
     filmTitle.innerText = film.title;
+    filmTitle.classList.add("card-title");
     newFilm.appendChild(filmTitle)
 
     const filmID = document.createElement("p");
@@ -31,22 +41,27 @@ const renderFilm = (film,divSection) => {
 
     const filmDirector = document.createElement("p");
     filmDirector.innerText = `Directed By: ${film.director}`;
+    filmDirector.classList.add("card-text");
     newFilm.appendChild(filmDirector);
 
     const filmRuntime = document.createElement("p");
     filmRuntime.innerText = `Runtime: ${film.runtime}`;
+    filmRuntime.classList.add("card-text");
     newFilm.appendChild(filmRuntime);
 
     const filmAgeRating = document.createElement("p");
     filmAgeRating.innerText = `Age Rating: ${film.ageRating}`;
+    filmAgeRating.classList.add("card-text");
     newFilm.appendChild(filmAgeRating);
 
     const deleteButton = document.createElement('button');
     deleteButton.innerText = "DELETE";
+    deleteButton.classList.add("btn", "btn-primary");
     deleteButton.addEventListener('click', () => deleteFilm(film.id));
 
     newFilm.appendChild(deleteButton);
-    divSection.appendChild(newFilm);
+    filmCard.appendChild(newFilm);
+    divSection.appendChild(filmColumn);
 
 }
 
